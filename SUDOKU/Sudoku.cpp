@@ -226,4 +226,114 @@ bool dll::GRID::value_ok(int row, int col)const
 	return game_grid[row][col].valid_number;
 }
 
+void dll::GRID::set_level(int level)
+{
+	RANDIT Randerer{};
+
+	if (level == 1)
+	{
+		for (int i = 0; i <= 20; ++i)
+		{
+			bool is_ok = false;
+			while (!is_ok)
+			{
+				is_ok = true;
+
+				int new_value = Randerer(1, 9);
+				int a_row = Randerer(0, 8);
+				int a_col = Randerer(0, 8);
+
+				if (game_grid[a_row][a_col].value > 0)is_ok = false;
+				else
+				{
+					set_value(a_row, a_col, new_value);
+					if (!value_ok(a_row, a_col))
+					{
+						game_grid[a_row][a_col].value = -1;
+						is_ok = false;
+					}
+				}
+			}
+		}
+	}
+	else if (level == 2)
+	{
+		for (int i = 0; i <= 15; ++i)
+		{
+			bool is_ok = false;
+			while (!is_ok)
+			{
+				is_ok = true;
+
+				int new_value = Randerer(1, 9);
+				int a_row = Randerer(0, 8);
+				int a_col = Randerer(0, 8);
+
+				if (game_grid[a_row][a_col].value > 0)is_ok = false;
+				else
+				{
+					set_value(a_row, a_col, new_value);
+					if (!value_ok(a_row, a_col))
+					{
+						game_grid[a_row][a_col].value = -1;
+						is_ok = false;
+					}
+				}
+			}
+		}
+	}
+	else if (level == 3)
+	{
+		for (int i = 0; i <= 10; ++i)
+		{
+			bool is_ok = false;
+			while (!is_ok)
+			{
+				is_ok = true;
+
+				int new_value = Randerer(1, 9);
+				int a_row = Randerer(0, 8);
+				int a_col = Randerer(0, 8);
+
+				if (game_grid[a_row][a_col].value > 0)is_ok = false;
+				else
+				{
+					set_value(a_row, a_col, new_value);
+					if (!value_ok(a_row, a_col))
+					{
+						game_grid[a_row][a_col].value = -1;
+						is_ok = false;
+					}
+				}
+			}
+		}
+	}
+	else if (level == 4)
+	{
+		for (int i = 0; i <= 5; ++i)
+		{
+			bool is_ok = false;
+			while (!is_ok)
+			{
+				is_ok = true;
+
+				int new_value = Randerer(1, 9);
+				int a_row = Randerer(0, 8);
+				int a_col = Randerer(0, 8);
+
+				if (game_grid[a_row][a_col].value > 0)is_ok = false;
+				else
+				{
+					set_value(a_row, a_col, new_value);
+					if (!value_ok(a_row, a_col))
+					{
+						game_grid[a_row][a_col].value = -1;
+						is_ok = false;
+					}
+				}
+			}
+		}
+	}
+}
+
 ////////////////////////////////////////

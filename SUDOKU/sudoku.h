@@ -105,5 +105,7 @@ namespace dll
 
 		void set_value(int row, int col, int new_value);
 		bool value_ok(int row, int col)const;
+
+		void set_level(int level);
 	};
 }
