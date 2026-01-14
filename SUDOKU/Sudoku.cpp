@@ -145,8 +145,8 @@ dll::GRID::GRID()
 			int quadrant_col = 0;
 
 			if (rows < 3)quadrant_row = 0;
-			else if (rows < 6)quadrant_row = 1;
-			else quadrant_row = 2;
+			else if (rows < 6)quadrant_row = 3;
+			else quadrant_row = 6;
 
 			if (cols < 3)quadrant_col = 0;
 			else if (cols < 6)quadrant_col = 1;
@@ -180,6 +180,13 @@ int dll::GRID::get_quadrant(int row, int col)const
 
 void dll::GRID::set_value(int row, int col, int new_value)
 {
+	if (new_value == CLEAR_VALUE)
+	{
+		game_grid[row][col].value = new_value;
+		game_grid[row][col].valid_number = true;
+		return;
+	}
+	
 	int my_quadrant = game_grid[row][col].quadrant;
 	
 	game_grid[row][col].value = new_value;

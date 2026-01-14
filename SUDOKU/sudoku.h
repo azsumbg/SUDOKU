@@ -10,6 +10,7 @@
 
 constexpr int MAX_ROWS{ 9 };
 constexpr int MAX_COLS{ 9 };
+constexpr int CLEAR_VALUE{ -1 };
 
 constexpr float scr_width{ 460.0f };
 constexpr float scr_height{ 560.0f };
@@ -29,7 +30,6 @@ struct SUDOKU_API FRECT
 	float right{ 0 };
 	float down{ 0 };
 };
-
 
 namespace dll
 {
@@ -86,10 +86,10 @@ namespace dll
 	{
 		PROTON dims{};
 		int quadrant = -1;
-		int value = -1;
+		int value = CLEAR_VALUE;
 		int row = -1;
 		int col = -1;
-		bool valid_number = false;
+		bool valid_number = true;
 	};
 
 	class SUDOKU_API GRID
