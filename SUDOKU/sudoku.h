@@ -107,5 +107,7 @@ namespace dll
 		bool value_ok(int row, int col)const;
 
 		void set_level(int level);
+
+		FRECT get_dims(int row, int col) const;
 	};
 }

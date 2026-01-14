@@ -343,4 +343,12 @@ void dll::GRID::set_level(int level)
 	}
 }
 
+FRECT dll::GRID::get_dims(int row, int col) const
+{
+	FRECT ret{ game_grid[row][col].dims.start.x,game_grid[row][col].dims.start.y,
+	game_grid[row][col].dims.end.x,game_grid[row][col].dims.end.y };
+
+	return ret;
+}
+
 ////////////////////////////////////////
