@@ -134,7 +134,7 @@ dll::PROTON* dll::PROTON::create(float sx, float sy, float s_width, float s_heig
 
 dll::GRID::GRID()
 {
-	float next_x = 0;
+	float next_x = 5.0f;
 	float next_y = sky;
 
 	for (int rows = 0; rows < MAX_ROWS; ++rows)
@@ -165,6 +165,7 @@ dll::GRID::GRID()
 			next_x += 49.0f;
 		}
 
+		next_x = 5.0f;
 		next_y += 49.0f;
 	}
 }
