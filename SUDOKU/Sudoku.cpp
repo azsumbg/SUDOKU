@@ -234,97 +234,69 @@ bool dll::GRID::value_ok(int row, int col)const
 	return game_grid[row][col].valid_number;
 }
 
-void dll::GRID::set_level(int level)
+void dll::GRID::clear_grid()
 {
-	RANDIT Randerer{};
-
-	int flag1 = 1;
-	int flag2 = 2;
-	int flag3 = 4;
-	int flag4 = 8;
-	int flag5 = 16;
-	int flag6 = 32;
-	int flag7 = 64;
-	int flag8 = 128;
-	int flag9 = 256;
-
 	for (int rows = 0; rows < MAX_ROWS; ++rows)
 	{
 		for (int cols = 0; cols < MAX_COLS; ++cols)
 		{
-			bool is_ok = false;
+			game_grid[rows][cols].value = CLEAR_VALUE;
+			game_grid[rows][cols].valid_number = true;
+		}
+	}
+}
 
-			int current_flag = 0;
+void dll::GRID::set_level(int level)
+{
+	clear_grid();
 
-			while (!is_ok)
+	RANDIT Randerer{};
+
+	bool is_ok = false;
+
+	while (!is_ok)
+	{
+		is_ok = true;
+
+		for (int rows = 0; rows < MAX_ROWS; ++rows)
+		{
+			int num = Randerer(1, 9);
+
+			for (int cols = 0; cols < MAX_COLS; ++cols)
 			{
-				is_ok = true;
+				set_value(rows, cols, num);
 
-				int new_value = Randerer(1, 9);
-
-				set_value(rows, cols, new_value);
-				
 				if (!value_ok(rows, cols))
 				{
-					switch (new_value)
+					for (int i = 0; i <= cols; ++i)
 					{
-					case 1:
-						current_flag |= flag1;
-						break;
-
-					case 2:
-						current_flag |= flag2;
-						break;
-
-					case 3:
-						current_flag |= flag3;
-						break;
-
-					case 4:
-						current_flag |= flag4;
-						break;
-
-					case 5:
-						current_flag |= flag5;
-						break;
-
-					case 6:
-						current_flag |= flag6;
-						break;
-
-					case 7:
-						current_flag |= flag7;
-						break;
-
-					case 8:
-						current_flag |= flag8;
-						break;
-
-					case 9:
-						current_flag |= flag9;
-						break;
+						set_value(rows, i, CLEAR_VALUE);
 					}
-					is_ok = false;
-
-					if (current_flag == 511)
-					{
-						if (cols > 0)
-						{
-							cols--;
-							break;
-						}
-						else
-						{
-							if (rows > 0)
-							{
-								cols = 8;
-								--rows;
-								break;
-							} 
-						}
-					}
+					cols = 0;
+					num = Randerer(1, 9);
+				}
+				else
+				{
+					++num;
+					if (num > 9)num = 1;
 				}
 			}
+		}
+
+		for (int rows = 0; rows < MAX_ROWS; ++rows)
+		{
+			for (int cols = 0; cols < MAX_COLS; ++cols)
+			{
+				set_value(rows, cols, get_value(rows, cols));
+				if (!value_ok(rows, cols))
+				{
+					is_ok = false;
+					clear_grid();
+					break;
+				}
+			}
+			
+			if (!is_ok)break;
 		}
 	}
 
@@ -332,55 +304,105 @@ void dll::GRID::set_level(int level)
 	{
 		for (int i = 0; i <= 25; ++i)
 		{
+			bool ok = false;
+			while (!ok)
+			{
+				ok = true;
+
 				int a_row = Randerer(0, 8);
 				int a_col = Randerer(0, 8);
 
-				game_grid[a_row][a_col].value = CLEAR_VALUE;
-				game_grid[a_row][a_col].valid_number = true;
+				if (game_grid[a_row][a_col].value == CLEAR_VALUE)ok = false;
+				else
+				{
+					game_grid[a_row][a_col].value = CLEAR_VALUE;
+					game_grid[a_row][a_col].valid_number = true;
+				}
+			}
 		}
 	}
 	else if (level == 2)
 	{
 		for (int i = 0; i <= 20; ++i)
 		{
-			int a_row = Randerer(0, 8);
-			int a_col = Randerer(0, 8);
+			bool ok = false;
+			while (!ok)
+			{
+				ok = true;
 
-			game_grid[a_row][a_col].value = CLEAR_VALUE;
-			game_grid[a_row][a_col].valid_number = true;
+				int a_row = Randerer(0, 8);
+				int a_col = Randerer(0, 8);
+
+				if (game_grid[a_row][a_col].value == CLEAR_VALUE)ok = false;
+				else
+				{
+					game_grid[a_row][a_col].value = CLEAR_VALUE;
+					game_grid[a_row][a_col].valid_number = true;
+				}
+			}
 		}
 	}
 	else if (level == 3)
 	{
 		for (int i = 0; i <= 15; ++i)
 		{
-			int a_row = Randerer(0, 8);
-			int a_col = Randerer(0, 8);
+			bool ok = false;
+			while (!ok)
+			{
+				ok = true;
 
-			game_grid[a_row][a_col].value = CLEAR_VALUE;
-			game_grid[a_row][a_col].valid_number = true;
+				int a_row = Randerer(0, 8);
+				int a_col = Randerer(0, 8);
+
+				if (game_grid[a_row][a_col].value == CLEAR_VALUE)ok = false;
+				else
+				{
+					game_grid[a_row][a_col].value = CLEAR_VALUE;
+					game_grid[a_row][a_col].valid_number = true;
+				}
+			}
 		}
 	}
 	else if (level == 4)
 	{
 		for (int i = 0; i <= 10; ++i)
 		{
-			int a_row = Randerer(0, 8);
-			int a_col = Randerer(0, 8);
+			bool ok = false;
+			while (!ok)
+			{
+				ok = true;
 
-			game_grid[a_row][a_col].value = CLEAR_VALUE;
-			game_grid[a_row][a_col].valid_number = true;
+				int a_row = Randerer(0, 8);
+				int a_col = Randerer(0, 8);
+
+				if (game_grid[a_row][a_col].value == CLEAR_VALUE)ok = false;
+				else
+				{
+					game_grid[a_row][a_col].value = CLEAR_VALUE;
+					game_grid[a_row][a_col].valid_number = true;
+				}
+			}
 		}
 	}
 	else if (level == 5)
 	{
 		for (int i = 0; i <= 5; ++i)
 		{
-			int a_row = Randerer(0, 8);
-			int a_col = Randerer(0, 8);
+			bool ok = false;
+			while (!ok)
+			{
+				ok = true;
 
-			game_grid[a_row][a_col].value = CLEAR_VALUE;
-			game_grid[a_row][a_col].valid_number = true;
+				int a_row = Randerer(0, 8);
+				int a_col = Randerer(0, 8);
+
+				if (game_grid[a_row][a_col].value == CLEAR_VALUE)ok = false;
+				else
+				{
+					game_grid[a_row][a_col].value = CLEAR_VALUE;
+					game_grid[a_row][a_col].valid_number = true;
+				}
+			}
 		}
 	}
 }
