@@ -248,8 +248,6 @@ void dll::GRID::clear_grid()
 
 void dll::GRID::set_level(int level)
 {
-	clear_grid();
-
 	RANDIT Randerer{};
 
 	bool is_ok = false;
@@ -258,9 +256,12 @@ void dll::GRID::set_level(int level)
 	{
 		is_ok = true;
 
+		clear_grid();
+
 		for (int rows = 0; rows < MAX_ROWS; ++rows)
 		{
 			int num = Randerer(1, 9);
+			int iteration = 0;
 
 			for (int cols = 0; cols < MAX_COLS; ++cols)
 			{
@@ -274,6 +275,12 @@ void dll::GRID::set_level(int level)
 					}
 					cols = 0;
 					num = Randerer(1, 9);
+					++iteration;
+					if (iteration > 18)
+					{
+						rows = 0;
+						break;
+					}
 				}
 				else
 				{
@@ -291,7 +298,6 @@ void dll::GRID::set_level(int level)
 				if (!value_ok(rows, cols))
 				{
 					is_ok = false;
-					clear_grid();
 					break;
 				}
 			}
@@ -300,6 +306,7 @@ void dll::GRID::set_level(int level)
 		}
 	}
 
+	
 	if (level == 1)
 	{
 		for (int i = 0; i <= 25; ++i)
